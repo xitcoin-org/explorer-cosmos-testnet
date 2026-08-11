@@ -1,0 +1,54 @@
+{
+  "chain_name": "xitcoin-testnet-2026-1",
+  "registry_name": "Xitcoin Testnet",
+  "network_type": "testnet",
+  "api": [
+    {
+      "address": "https://api-testnet.xitcoin.org",
+      "provider": "Xitcoin"
+    }
+  ],
+  "rpc": [
+    {
+      "address": "https://rpc-testnet.xitcoin.org",
+      "provider": "Xitcoin"
+    }
+  ],
+  "grpc": [
+    {
+      "address": "grpc-testnet.xitcoin.org:443",
+      "provider": "Xitcoin"
+    }
+  ],
+  "coingecko": "xitcoin",
+  "snapshot_provider": "",
+  "sdk_version": "0.54.3",
+  "coin_type": "60",
+  "min_tx_fee": "0",
+  "addr_prefix": "xtc",
+  "consensus_prefix": "xtcvalcons",
+  "theme_color": "#c59b3a",
+  "logo": "https://explorer-testnet.xitcoin.org/assets/xitcoin-logo.png",
+  "assets": [
+    {
+      "base": "xtc",
+      "symbol": "XTC",
+      "exponent": "18",
+      "coingecko_id": "xitcoin",
+      "logo": "https://explorer-testnet.xitcoin.org/assets/xitcoin-logo.png"
+    }
+  ],
+  "features": [
+    "dashboard",
+    "governance",
+    "staking",
+    "blocks",
+    "tx",
+    "uptime",
+    "ibc",
+    "supply",
+    "parameters",
+    "consensus",
+    "faucet"
+  ]
+}
