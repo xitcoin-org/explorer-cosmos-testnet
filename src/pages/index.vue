@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const explorerPath = '/xitcoin-testnet-2026-1';
+const explorerPath = '/xitcoin-testnet';
 const faucetUrl = 'https://faucet-testnet.xitcoin.org/';
 const apiUrl = 'https://api-testnet.xitcoin.org/';
 const rpcUrl = 'https://rpc-testnet.xitcoin.org/';

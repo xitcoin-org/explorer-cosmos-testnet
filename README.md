@@ -1,18 +1,41 @@
 # Xitcoin Cosmos Testnet Explorer
 
-Source, chain configuration and branding for the Xitcoin Cosmos testnet explorer.
+Source and configuration for the Xitcoin Cosmos testnet explorer.
 
-Public endpoint: https://explorer-testnet.xitcoin.org/
+## Network
 
-## Scope
+| Property | Value |
+| --- | --- |
+| Network | Xitcoin Testnet |
+| Cosmos chain ID | `xitcoin-testnet-2026-1` |
+| Address prefix | `xtc` |
+| Validator prefix | `xtcvaloper` |
+| Native currency | XTC |
+| Public explorer | https://explorer-testnet.xitcoin.org/ |
 
-- Xitcoin Testnet only: `xitcoin-testnet-2026-1`
-- Cosmos REST API, RPC and gRPC configuration
-- Explorer branding, assets and frontend source
+The deployed network identifier remains documented here until the next testnet genesis is activated. Repository naming and public navigation use the stable name **Xitcoin Testnet**.
 
-## Security
+## Development
 
-Do not commit environment files, private keys, certificates, deployment keys,
-build output or `node_modules`.
+Requirements: Node.js and Yarn.
 
-Deployment secrets remain exclusively on the server.
+```bash
+yarn install --frozen-lockfile
+yarn dev
+```
+
+Create a production build:
+
+```bash
+yarn build
+```
+
+## Configuration
+
+The Xitcoin network definition is stored in `chains/testnet/xitcoin-testnet.json`. Public RPC, API and gRPC endpoints must use HTTPS or TLS and must match the active testnet.
+
+Official token artwork comes from [`xitcoin-org/brand`](https://github.com/xitcoin-org/brand). Explorer-specific assets must preserve the standalone XTC symbol.
+
+## Upstream
+
+The interface is based on [ping-pub/explorer](https://github.com/ping-pub/explorer). Xitcoin-specific configuration, branding and deployment automation are maintained in this repository.

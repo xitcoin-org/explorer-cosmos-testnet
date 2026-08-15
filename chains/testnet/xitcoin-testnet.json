@@ -1,5 +1,5 @@
 {
-  "chain_name": "xitcoin-testnet-2026-1",
+  "chain_name": "xitcoin-testnet",
   "registry_name": "Xitcoin Testnet",
   "network_type": "testnet",
   "api": [
@@ -27,15 +27,15 @@
   "min_tx_fee": "0",
   "addr_prefix": "xtc",
   "consensus_prefix": "xtcvalcons",
-  "theme_color": "#c59b3a",
-  "logo": "https://explorer-testnet.xitcoin.org/assets/xitcoin-logo.png",
+  "theme_color": "#FB8D00",
+  "logo": "/assets/xitcoin-logo.png",
   "assets": [
     {
       "base": "xtc",
       "symbol": "XTC",
       "exponent": "18",
       "coingecko_id": "xitcoin",
-      "logo": "https://explorer-testnet.xitcoin.org/assets/xitcoin-logo.png"
+      "logo": "/assets/xitcoin-logo.png"
     }
   ],
   "features": [

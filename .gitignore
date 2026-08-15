@@ -1,7 +1,8 @@
 node_modules/
-dist/
-.env
-.env.*
+**/.vscode
+yarn-error.log
+dist
+.idea
+
+.env*
 !.env.example
-.DS_Store
-*.log
