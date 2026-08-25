@@ -31,7 +31,7 @@
   "logo": "/assets/xitcoin-logo.png",
   "assets": [
     {
-      "base": "xtc",
+      "base": "axtc",
       "symbol": "XTC",
       "exponent": "18",
       "coingecko_id": "xitcoin",
