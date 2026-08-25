@@ -7,15 +7,15 @@ Source and configuration for the Xitcoin Cosmos testnet explorer.
 | Property | Value |
 | --- | --- |
 | Network | Xitcoin Testnet |
-| Cosmos chain ID | `xitcoin-testnet-2026-1` |
+| Cosmos chain ID | `xitcoin-testnet-1` |
 | Address prefix | `xtc` |
 | Validator prefix | `xtcvaloper` |
 | Native currency | XTC |
 | Public explorer | https://explorer-testnet.xitcoin.org/ |
 
-The deployed network identifier remains documented here until the next testnet genesis is activated. Repository naming and public navigation use the stable name **Xitcoin Testnet**.
+The active network uses the canonical identifier `xitcoin-testnet-1`. Repository naming and public navigation use the stable name **Xitcoin Testnet**.
 
-Canonical network identity and reset-candidate documentation are maintained in [`xitcoin-org/pos-chain`](https://github.com/xitcoin-org/pos-chain). Official token artwork comes from [`xitcoin-org/brand`](https://github.com/xitcoin-org/brand).
+Canonical public network configuration is maintained in [`xitcoin-org/testnets`](https://github.com/xitcoin-org/testnets). Node software is maintained in [`xitcoin-org/pos-chain`](https://github.com/xitcoin-org/pos-chain), and official token artwork comes from [`xitcoin-org/brand`](https://github.com/xitcoin-org/brand).
 
 ## Development
 
@@ -38,7 +38,7 @@ The Xitcoin network definition is stored in `chains/testnet/xitcoin-testnet.json
 
 ## Upstream
 
-The interface is based on [ping-pub/explorer](https://github.com/ping-pub/explorer). Xitcoin-specific configuration, branding and deployment automation are maintained in this repository.
+The interface is based on [ping-pub/explorer](https://github.com/ping-pub/explorer). Xitcoin-specific configuration and branding are maintained in this repository.
 
 ## Security
 

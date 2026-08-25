@@ -1,21 +1,66 @@
-
-name: Config Checker
+name: Config check
 
 on:
-  # push:
-  #   branches: [ master ]
+  push:
+    branches: [main]
+    paths:
+      - "chains/**/*.json"
+      - ".github/workflows/config-check.yaml"
   pull_request:
-   # branches: [ master ]
-   paths:
-      - 'chains/mainnet/**'
-      - 'chains/testnet/**'
+    branches: [main]
+    paths:
+      - "chains/**/*.json"
+      - ".github/workflows/config-check.yaml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
-  deploy:
-    name: Check Blockchain Config
-    runs-on: ubuntu-latest
+  validate:
+    name: Validate chain configuration
+    runs-on: ubuntu-24.04
+
     steps:
-    - name: Git Checkout Latest
-      uses: actions/checkout@v3
-    - name: Check Chain Configs
-      uses: ping-pub/ping-dashboard-config-checker@v1.0
+      - name: Check out source
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Validate JSON and canonical Xitcoin identity
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          files = sorted(Path("chains").glob("**/*.json"))
+          if not files:
+              raise SystemExit("No chain configuration files found")
+
+          for path in files:
+              with path.open(encoding="utf-8") as handle:
+                  json.load(handle)
+              print(f"[OK] JSON: {path}")
+
+          path = Path("chains/testnet/xitcoin-testnet.json")
+          with path.open(encoding="utf-8") as handle:
+              chain = json.load(handle)
+
+          assert chain["chain_name"] == "xitcoin-testnet"
+          assert chain["registry_name"] == "Xitcoin Testnet"
+          assert chain["network_type"] == "testnet"
+          assert chain["addr_prefix"] == "xtc"
+          assert chain["consensus_prefix"] == "xtcvalcons"
+          assert chain["coin_type"] == "60"
+          assert all(item["address"].startswith("https://") for item in chain["api"])
+          assert all(item["address"].startswith("https://") for item in chain["rpc"])
+          assert all(item["address"].endswith(":443") for item in chain["grpc"])
+
+          assets = chain["assets"]
+          assert len(assets) == 1
+          assert assets[0]["base"] == "axtc"
+          assert assets[0]["symbol"] == "XTC"
+          assert assets[0]["exponent"] == "18"
+
+          print("[OK] Canonical Xitcoin Testnet configuration")
+          PY
