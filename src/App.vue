@@ -1,8 +1,16 @@
 <script setup lang="ts">
 import { themeChange } from 'theme-change';
-import { onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 import TxDialog from './components/TxDialog.vue';
 import { useBaseStore } from '@/stores';
+import { useRoute } from 'vue-router';
+import DefaultLayout from '@/layouts/default.vue';
+import BlankLayout from '@/layouts/blank.vue';
+
+const route = useRoute();
+const layout = computed(() =>
+  route.meta.layout === 'blank' ? BlankLayout : DefaultLayout,
+);
 
 const REFRESH_INTERVAL = import.meta.env.VITE_REFRESH_INTERVAL || 6000;
 
@@ -50,7 +58,7 @@ onUnmounted(() => {
 
 <template>
   <div>
-    <RouterView />
+    <component :is="layout" />
     <TxDialog />
   </div>
 </template>

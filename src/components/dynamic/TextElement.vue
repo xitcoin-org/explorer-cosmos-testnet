@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { isBech32Address } from '@/libs/utils';
 import { useBlockchain, useFormatter } from '@/stores';
-import MdEditor from 'md-editor-v3';
+import { MdEditor } from 'md-editor-v3';
 import { computed, ref } from 'vue';
 
 import { fromBase64, toHex } from '@cosmjs/encoding';

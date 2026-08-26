@@ -35,7 +35,21 @@ const voterStatusMap: Record<string, string> = {
 const proposalInfo = ref();
 
 function metaItem(metadata: string | undefined): { title: string; summary: string } {
-  return metadata ? JSON.parse(metadata) : {};
+  if (!metadata) return { title: '', summary: '' };
+
+  try {
+    const parsed = JSON.parse(metadata) as Partial<{
+      title: unknown;
+      summary: unknown;
+    }>;
+
+    return {
+      title: typeof parsed.title === 'string' ? parsed.title : '',
+      summary: typeof parsed.summary === 'string' ? parsed.summary : '',
+    };
+  } catch {
+    return { title: '', summary: '' };
+  }
 }
 </script>
 <template>
