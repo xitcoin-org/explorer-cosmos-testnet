@@ -10,7 +10,6 @@ import { toBase64 } from '@cosmjs/encoding';
 import DOMPurify from 'dompurify';
 
 import { JsonViewer } from 'vue3-json-viewer';
-import { CosmjsOfflineSigner } from '@leapwallet/cosmos-snap-provider';
 
 interface Verification {
   chainId?: string;
