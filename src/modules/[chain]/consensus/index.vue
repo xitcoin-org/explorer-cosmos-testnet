@@ -174,7 +174,7 @@ async function update() {
         {{ rpc }}
       </div>
       <div v-if="httpstatus !== 200" class="alert alert-error mt-4">
-        Consensus endpoint unavailable: {{ httpstatusText }}
+        Consensus endpoint unavailable: {{ httpStatusText }}
       </div>
     </section>
 
