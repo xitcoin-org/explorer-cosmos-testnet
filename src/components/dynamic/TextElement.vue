@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { isBech32Address } from '@/libs/utils';
 import { useBlockchain, useFormatter } from '@/stores';
-import { MdEditor } from 'md-editor-v3';
 import { computed, ref } from 'vue';
 
 import { fromBase64, toHex } from '@cosmjs/encoding';
@@ -44,7 +43,7 @@ const isConvertable = computed(() => {
 });
 </script>
 <template>
-  <MdEditor v-if="isMD()" :model-value="format.multiLine(value)" previewOnly class="md-editor-recover"></MdEditor>
+  <div v-if="isMD()" class="whitespace-pre-wrap break-words leading-6 text-base-content/80">{{ format.multiLine(value) }}</div>
   <span v-else-if="isAddress()" class="flex">
     <RouterLink :to="`/${chainStore.chainName}/account/${text}`">{{ text }}</RouterLink>
   </span>
