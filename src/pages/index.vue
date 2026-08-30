@@ -25,7 +25,7 @@ const rpcUrl = 'https://rpc-testnet.xitcoin.org/';
           Ouvrir l’explorer
         </RouterLink>
         <a :href="faucetUrl" target="_blank" rel="noopener" class="btn btn-outline">
-          Obtenir 100 XTC testnet
+          Obtenir 10 XTC testnet
         </a>
       </div>
     </div>
