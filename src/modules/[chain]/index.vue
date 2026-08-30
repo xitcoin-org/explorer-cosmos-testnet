@@ -34,7 +34,7 @@ const isNodeVersionLoading = computed(
   () => !Array.isArray(paramStore.nodeVersion?.items) || paramStore.nodeVersion.items.length === 0
 );
 const publicAppVersion = computed(() => {
-  const details = paramStore.appVersion?.items?.[0];
+  const details = (paramStore.appVersion?.items as any[])?.[0];
   if (!details) return [];
   return [{
     name: details.name,
