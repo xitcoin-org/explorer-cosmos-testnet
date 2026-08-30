@@ -110,23 +110,18 @@ function suggest() {
 
 <template>
   <div class="bg-base-100 p-4 rounded text-center">
-    <div class="flex text-center">
-      <select v-model="network" class="select select-bordered">
-        <option :value="NetworkType.Mainnet">Mainnet</option>
-        <option :value="NetworkType.Testnet">Testnet</option>
-      </select>
-      <select v-model="selected" class="select select-bordered mx-5" @change="initParamsForKeplr">
-        <option v-for="c in chains" :value="c">
-          {{ c.chainName }}
-        </option>
-      </select>
+    <div class="text-left">
+      <h1 class="text-2xl font-semibold text-main">Xitcoin Testnet wallet configuration</h1>
+      <p class="mt-2 text-gray-500">
+        Cosmos chain ID: <code>xitcoin-testnet-1</code> · Currency: <code>XTC</code>
+      </p>
     </div>
     <div class="text-main mt-5">
       <textarea v-model="conf" class="textarea textarea-bordered w-full" rows="15"></textarea>
     </div>
     <div class="mt-4 mb-4">
       <button class="btn !bg-primary !border-primary text-white mr-2" @click="suggest">
-        Suggest {{ selected.chainName }} to Keplr
+        Add Xitcoin Testnet to Keplr
       </button>
 
       <div class="mt-4">
