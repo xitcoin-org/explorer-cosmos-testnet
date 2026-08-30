@@ -7,7 +7,7 @@ const faucetUrl = 'https://faucet-testnet.xitcoin.org/';
     <div class="bg-base-100 px-6 py-8 rounded shadow text-center">
       <h1 class="text-primary text-3xl font-bold">Xitcoin Testnet Faucet</h1>
       <p class="mt-4 text-base-content/70">
-        Receive 100 XTC testnet for development and testing.
+        Receive 10 XTC testnet for development and testing.
         Testnet tokens have no monetary value.
       </p>
       <a :href="faucetUrl" class="btn btn-primary mt-6" target="_blank" rel="noopener">
