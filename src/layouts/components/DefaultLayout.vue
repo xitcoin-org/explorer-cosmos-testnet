@@ -102,7 +102,7 @@ const show_ad = computed(() => {
           <Icon icon="mdi-close" class="text-2xl" />
         </div>
       </div>
-      <div v-for="(item, index) of blockchain.computedChainMenu" :key="index" class="px-2">
+      <div v-for="(item, index) of blockchain.computedChainMenu" v-show="index === 0" :key="index" class="px-2">
         <div
           v-if="isNavGroup(item)"
           :tabindex="index"
@@ -173,19 +173,6 @@ const show_ad = computed(() => {
                 >
                   {{ item?.title === 'Favorite' ? el?.title : (el?.title === "Module.Faucet" ? "Faucet" : (el?.title)) }}
                 </div>
-              </RouterLink>
-            </div>
-            <div
-              v-if="index === 0 && dashboard.networkType === NetworkType.Testnet"
-              class="menu bg-base-100 w-full !p-0"
-            >
-              <RouterLink
-                class="hover:bg-gray-100 dark:hover:bg-[#373f59] rounded cursor-pointer px-3 py-2 flex items-center"
-                :to="`/${blockchain.chainName}/faucet`"
-              >
-                <Icon icon="mdi:chevron-right" class="mr-2 ml-3"></Icon>
-                <div class="text-base capitalize text-gray-500 dark:text-gray-300">Faucet</div>
-                <div class="badge badge-sm text-white border-none badge-error ml-auto">New</div>
               </RouterLink>
             </div>
           </div>
