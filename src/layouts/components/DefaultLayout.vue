@@ -13,7 +13,6 @@ import { useDashboard } from '@/stores/useDashboard';
 import { NetworkType } from '@/types/chaindata';
 import { useBaseStore, useBlockchain } from '@/stores';
 
-import NavBarI18n from './NavBarI18n.vue';
 import NavBarWallet from './NavBarWallet.vue';
 import type {
   NavGroup,
@@ -93,7 +92,7 @@ const show_ad = computed(() => {
       <div class="flex justify-between mt-1 pl-4 py-4 mb-1">
         <RouterLink to="/" class="flex items-center">
           <img class="w-10 h-10" src="/assets/xitcoin-logo.png" />
-          <h1 class="flex-1 ml-3 text-2xl font-semibold dark:text-white">Xitcoin Testnet</h1>
+          <h1 class="flex-1 ml-3 text-xl font-semibold tracking-tight dark:text-white">Xitcoin Testnet</h1>
         </RouterLink>
         <div
           class="pr-4 cursor-pointer xl:!hidden"
@@ -145,7 +144,7 @@ const show_ad = computed(() => {
                 @click="sidebarShow = false"
                 class="hover:bg-gray-100 dark:hover:bg-[#373f59] rounded cursor-pointer px-3 py-2 flex items-center"
                 :class="{
-                  '!bg-primary': selected($route, el),
+                  '!bg-blue-600': selected($route, el),
                 }"
                 :to="el.to"
               >
@@ -277,7 +276,6 @@ const show_ad = computed(() => {
         <div class="flex-1 w-0"></div>
 
         <!-- <NavSearchBar />-->
-        <NavBarI18n class="hidden md:!inline-block" />
         <NavbarThemeSwitcher class="!inline-block" />
         <NavbarSearch class="!inline-block" />
         <NavBarWallet />
