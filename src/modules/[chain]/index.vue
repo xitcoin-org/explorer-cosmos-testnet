@@ -33,6 +33,17 @@ const isAppVersionLoading = computed(
 const isNodeVersionLoading = computed(
   () => !Array.isArray(paramStore.nodeVersion?.items) || paramStore.nodeVersion.items.length === 0
 );
+const publicAppVersion = computed(() => {
+  const details = (paramStore.appVersion?.items as any[])?.[0];
+  if (!details) return [];
+  return [{
+    name: details.name,
+    app_name: details.app_name,
+    version: details.version,
+    git_commit: details.git_commit,
+    cosmos_sdk_version: details.cosmos_sdk_version,
+  }];
+});
 const isProposalsLoading = computed(() => govStore.loading['2'] !== LoadingStatus.Loaded);
 
 onMounted(() => {
@@ -484,24 +495,10 @@ const amount = computed({
 
     <div class="bg-base-100 rounded mt-4">
       <div class="px-4 pt-4 pb-2 text-lg font-semibold text-main">
-        {{ $t('index.app_versions') }}
+        Network software
       </div>
-      <!-- Application Version -->
       <Loading v-if="isAppVersionLoading" :bordered="false" />
-      <ArrayObjectElement
-        v-else
-        :value="paramStore.appVersion?.items"
-        :thead="false"
-      />
-      <div class="h-4"></div>
-    </div>
-
-    <div v-if="!store.coingeckoId" class="bg-base-100 rounded mt-4">
-      <div class="px-4 pt-4 pb-2 text-lg font-semibold text-main">
-        {{ $t('index.node_info') }}
-      </div>
-      <Loading v-if="isNodeVersionLoading" :bordered="false" />
-      <ArrayObjectElement v-else :value="paramStore.nodeVersion?.items" :thead="false" />
+      <ArrayObjectElement v-else :value="publicAppVersion" :thead="false" />
       <div class="h-4"></div>
     </div>
   </div>
