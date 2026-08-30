@@ -51,7 +51,7 @@ async function initParamsForKeplr() {
   conf.value = JSON.stringify(
     {
       chainId: chainid,
-      chainName: chain.chainName,
+      chainName: chain.prettyName || chain.chainName,
       rpc: chain.endpoints?.rpc?.at(0)?.address,
       rest: chain.endpoints?.rest?.at(0)?.address,
       bip44: {
@@ -130,7 +130,7 @@ function suggest() {
       </button>
 
       <div class="mt-4">
-        If the chain is not offically support on Keplr, you can submit these parameters to enable
+        If the chain is not officially supported by Keplr, you can submit these parameters to enable
         Keplr.
       </div>
     </div>
