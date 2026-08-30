@@ -60,26 +60,27 @@ function shortName(name?: string, id?: string) {
 }
 
 const comLinks = computed(() => {
+  const official = blockchain.chainName === 'xitcoin-testnet';
   return [
     {
       name: 'Website',
       icon: 'mdi-web',
-      href: store.homepage,
+      href: official ? 'https://xitcoin.org/' : store.homepage,
     },
     {
       name: 'Twitter',
       icon: 'mdi-twitter',
-      href: store.twitter,
+      href: official ? 'https://twitter.com/xitcoin_org' : store.twitter,
     },
     {
       name: 'Telegram',
       icon: 'mdi-telegram',
-      href: store.telegram,
+      href: official ? 'https://t.me/xitcoin_org' : store.telegram,
     },
     {
       name: 'Github',
       icon: 'mdi-github',
-      href: store.github,
+      href: official ? 'https://github.com/xitcoin-org/pos-chain' : store.github,
     },
   ];
 });
