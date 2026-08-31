@@ -350,7 +350,12 @@ loadAvatars();
                           {{ v.description?.moniker }}
                         </RouterLink>
                       </span>
-                      <span class="text-xs">{{ v.description?.website || v.description?.identity || '-' }}</span>
+                      <span
+                        v-if="v.description?.website || v.description?.identity"
+                        class="text-xs"
+                      >
+                        {{ v.description?.website || v.description?.identity }}
+                      </span>
                     </div>
                   </div>
                 </td>
