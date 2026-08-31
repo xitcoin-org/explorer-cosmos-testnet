@@ -46,12 +46,12 @@ const messages = computed(() => {
 
     <div v-if="tx.tx_response" class="bg-base-100 px-4 pt-3 pb-4 rounded shadow mb-4">
       <h2 class="card-title truncate mb-2">{{ $t('tx.title') }}</h2>
-      <div class="overflow-hidden">
-        <table class="table text-sm">
+      <div class="overflow-x-auto">
+        <table class="table text-sm min-w-[42rem]">
           <tbody>
             <tr>
               <td>{{ $t('tx.tx_hash') }}</td>
-              <td class="overflow-hidden">{{ tx.tx_response.txhash }}</td>
+              <td class="font-mono break-all">{{ tx.tx_response.txhash }}</td>
             </tr>
             <tr>
               <td>{{ $t('account.height') }}</td>
@@ -108,8 +108,8 @@ const messages = computed(() => {
 
     <div v-if="tx.tx_response" class="bg-base-100 px-4 pt-3 pb-4 rounded shadow mb-4">
       <h2 class="card-title truncate mb-2">{{ $t('account.messages') }}: ({{ messages.length }})</h2>
-      <div v-for="(msg, i) in messages">
-        <div class="border border-slate-400 rounded-md mt-4">
+      <div v-for="(msg, i) in messages" :key="i">
+        <div class="overflow-x-auto border border-base-300 rounded-md mt-4">
           <DynamicComponent :value="msg" />
         </div>
       </div>
@@ -117,16 +117,35 @@ const messages = computed(() => {
     </div>
 
     <div v-if="tx.tx_response" class="bg-base-100 px-4 pt-3 pb-4 rounded shadow">
-      <h2 class="card-title truncate mb-2">JSON</h2>
-      <JsonViewer
-        :value="tx"
-        :theme="baseStore.theme"
-        style="background: transparent"
-        copyable
-        boxed
-        sort
-        expand-depth="5"
-      />
+      <div class="mb-3">
+        <h2 class="card-title">Raw transaction data</h2>
+        <p class="text-sm text-base-content/60">
+          Complete API response. Expand only the fields you need or copy the complete JSON.
+        </p>
+      </div>
+      <div class="transaction-json overflow-auto rounded-md border border-base-300 p-2">
+        <JsonViewer
+          :value="tx"
+          :theme="baseStore.theme"
+          style="background: transparent"
+          copyable
+          boxed
+          :expand-depth="2"
+        />
+      </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.transaction-json {
+  max-height: min(44rem, 70vh);
+}
+
+.transaction-json :deep(.jv-container),
+.transaction-json :deep(.jv-code) {
+  min-width: max-content;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+</style>
