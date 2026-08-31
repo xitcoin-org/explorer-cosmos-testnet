@@ -27,16 +27,23 @@ const isNodeVersionLoading = computed(
   () => !Array.isArray(paramStore.nodeVersion?.items) || paramStore.nodeVersion.items.length === 0
 );
 const publicAppVersion = computed(() => {
-  const details = (paramStore.appVersion?.items as any[])?.[0];
-  if (!details) return [];
-  return [{
-    name: details.name,
-    app_name: details.app_name,
-    version: details.version,
-    git_commit: details.git_commit,
-    cosmos_sdk_version: details.cosmos_sdk_version,
-  }];
+  const labels: Record<string, string> = {
+    app_name: 'Application',
+    version: 'Version',
+    git_commit: 'Git commit',
+    cosmos_sdk_version: 'Cosmos SDK',
+    go_version: 'Go',
+  };
+
+  return ((paramStore.appVersion?.items as any[]) || [])
+    .filter((item) => labels[item.subtitle])
+    .map((item) => ({
+      subtitle: labels[item.subtitle],
+      value: item.value,
+    }));
 });
+const chainAssets = computed(() => blockchain.current?.assets || []);
+const assetDecimals = (asset: any) => Math.max(...(asset.denom_units || []).map((unit: any) => Number(unit.exponent || 0)));
 const isProposalsLoading = computed(() => govStore.loading['2'] !== LoadingStatus.Loaded);
 
 onMounted(() => {
@@ -223,7 +230,33 @@ function updateState() {
         }}</RouterLink>
       </div>    </div>
 
-    <div class="bg-base-100 rounded mt-4">
+    <div class="bg-base-100 rounded mt-4 shadow">
+      <div class="px-4 pt-4 pb-2 text-lg font-semibold text-main">
+        Native assets
+      </div>
+      <div class="grid grid-cols-1 md:!grid-cols-2 xl:!grid-cols-3 gap-4 px-4 pb-4">
+        <RouterLink
+          v-for="asset in chainAssets"
+          :key="asset.base"
+          :to="`/${chain}/supply`"
+          class="flex items-center gap-4 rounded bg-gray-100 dark:bg-[#373f59] px-4 py-3 hover:ring-1 hover:ring-primary"
+        >
+          <img
+            v-if="asset.logo_URIs?.svg || asset.logo_URIs?.png"
+            :src="asset.logo_URIs?.svg || asset.logo_URIs?.png"
+            :alt="asset.symbol"
+            class="h-10 w-10 object-contain"
+          />
+          <div class="min-w-0">
+            <div class="text-lg font-semibold text-main">{{ asset.symbol }}</div>
+            <div class="text-sm text-base-content/70">Base denomination: {{ asset.base }}</div>
+            <div class="text-sm text-base-content/70">Decimals: {{ assetDecimals(asset) }}</div>
+          </div>
+        </RouterLink>
+      </div>
+    </div>
+
+    <div class="bg-base-100 rounded mt-4 shadow">
       <div class="px-4 pt-4 pb-2 text-lg font-semibold text-main">
         Network software
       </div>
