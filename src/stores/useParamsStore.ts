@@ -174,14 +174,22 @@ export const useParamStore = defineStore('paramstore', {
 
       localStorage.setItem(`sdk_version_${this.blockchain.chainName}`, res.application_version?.cosmos_sdk_version);
 
-      this.appVersion.items = Object.entries(res.application_version).map(([key, value]) => ({
-        subtitle: key,
-        value: value,
-      }));
-      this.nodeVersion.items = Object.entries(res.default_node_info).map(([key, value]) => ({
-        subtitle: key,
-        value: value,
-      }));
+      const applicationFields = [
+        'name',
+        'app_name',
+        'version',
+        'git_commit',
+        'go_version',
+        'cosmos_sdk_version',
+      ];
+      const nodeFields = ['network', 'moniker', 'version', 'id', 'listen_addr'];
+
+      this.appVersion.items = Object.entries(res.application_version)
+        .filter(([key]) => applicationFields.includes(key))
+        .map(([key, value]) => ({ subtitle: key, value }));
+      this.nodeVersion.items = Object.entries(res.default_node_info)
+        .filter(([key]) => nodeFields.includes(key))
+        .map(([key, value]) => ({ subtitle: key, value }));
     },
     async getBaseTendermintBlockLatest() {
       return await this.blockchain.rpc?.getBaseBlockLatest();

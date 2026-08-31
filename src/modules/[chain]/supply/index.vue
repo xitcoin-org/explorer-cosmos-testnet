@@ -67,7 +67,11 @@ function pageload(p: number) {
           const denom = asset?.symbol || coin.denom;
           return {
             denom: denom.split('/')[denom.split('/').length - 1].toUpperCase(),
-            amount: format.tokenAmountNumber({ amount: coin.amount, denom: denom }).toString(),
+            amount: format.formatToken(
+              { amount: coin.amount, denom: coin.denom },
+              false,
+              '0,0.[000000]'
+            ),
             base: asset.base || coin.denom,
             info: asset.display || coin.denom,
             logo: asset?.logo_URIs?.svg || asset?.logo_URIs?.png || '/logo.svg',

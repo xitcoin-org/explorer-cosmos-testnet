@@ -113,7 +113,7 @@ function suggest() {
     <div class="text-left">
       <h1 class="text-2xl font-semibold text-main">Xitcoin Testnet wallet configuration</h1>
       <p class="mt-2 text-gray-500">
-        Cosmos chain ID: <code>xitcoin-testnet-1</code> · Currency: <code>XTC</code>
+        Cosmos chain ID: <code>xitcoin-testnet-v2-1</code> · Currency: <code>XTC</code>
       </p>
     </div>
     <div class="text-main mt-5">
