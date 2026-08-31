@@ -7,7 +7,6 @@ import newFooter from '@/layouts/components/NavFooter.vue';
 import NavbarThemeSwitcher from '@/layouts/components/NavbarThemeSwitcher.vue';
 import NavbarSearch from '@/layouts/components/NavbarSearch.vue';
 import ChainProfile from '@/layouts/components/ChainProfile.vue';
-import Sponsors from '@/layouts/components/Sponsors.vue';
 
 import { useDashboard } from '@/stores/useDashboard';
 import { NetworkType } from '@/types/chaindata';
@@ -21,7 +20,6 @@ import type {
   VerticalNavItems,
 } from '../types';
 import dayjs from 'dayjs';
-import AdBanner from '@/components/ad/AdBanner.vue';
 
 const dashboard = useDashboard();
 dashboard.initial();
@@ -50,7 +48,6 @@ const changeOpen = (index: Number) => {
     sidebarOpen.value = !sidebarOpen.value;
   }
 };
-const showDiscord = window.location.host.search('ping.pub') > -1;
 
 function isNavGroup(nav: VerticalNavItems | any): nav is NavGroup {
   return (<NavGroup>nav).children !== undefined;
@@ -77,9 +74,6 @@ const behind = computed(() => {
 
 dayjs();
 
-const show_ad = computed(() => {
-  return location.hostname.indexOf('ping.pub') > -1;
-});
 </script>
 
 <template>
@@ -101,7 +95,7 @@ const show_ad = computed(() => {
           <Icon icon="mdi-close" class="text-2xl" />
         </div>
       </div>
-      <div v-for="(item, index) of blockchain.computedChainMenu" v-show="index === 0" :key="index" class="px-2">
+      <div v-for="(item, index) of blockchain.computedChainMenu.slice(0, 1)" :key="index" class="px-2">
         <div
           v-if="isNavGroup(item)"
           :tabindex="index"
@@ -119,11 +113,7 @@ const show_ad = computed(() => {
             <Icon
               v-if="item?.icon?.icon"
               :icon="item?.icon?.icon"
-              class="text-xl mr-2"
-              :class="{
-                'text-yellow-500': item?.title === 'Favorite',
-                'text-blue-500': item?.title !== 'Favorite',
-              }"
+              class="text-xl mr-2 text-blue-500"
             />
             <img v-if="item?.icon?.image" :src="item?.icon?.image" class="w-6 h-6 rounded-full mr-3" />
             <div class="text-base capitalize flex-1 text-gray-700 dark:text-gray-200 whitespace-nowrap">
@@ -152,9 +142,7 @@ const show_ad = computed(() => {
                   v-if="!el?.icon?.image"
                   icon="mdi:chevron-right"
                   class="mr-2 ml-3"
-                  :class="{
-                    'text-white': $route.path === el?.to?.path && item?.title !== 'Favorite',
-                  }"
+                  :class="{ 'text-white': $route.path === el?.to?.path }"
                 />
                 <img
                   v-if="el?.icon?.image"
@@ -170,7 +158,7 @@ const show_ad = computed(() => {
                     '!text-white': selected($route, el),
                   }"
                 >
-                  {{ item?.title === 'Favorite' ? el?.title : (el?.title === "Module.Faucet" ? "Faucet" : (el?.title)) }}
+                  {{ el?.title === 'Module.Faucet' ? 'Faucet' : el?.title }}
                 </div>
               </RouterLink>
             </div>
@@ -186,11 +174,7 @@ const show_ad = computed(() => {
           <Icon
             v-if="item?.icon?.icon"
             :icon="item?.icon?.icon"
-            class="text-xl mr-2"
-            :class="{
-              'text-yellow-500': item?.title === 'Favorite',
-              'text-blue-500': item?.title !== 'Favorite',
-            }"
+            class="text-xl mr-2 text-blue-500"
           />
           <img
             v-if="item?.icon?.image"
@@ -216,21 +200,6 @@ const show_ad = computed(() => {
         </div>
       </div>
       <div class="px-2">
-        <div class="px-4 text-sm pt-2 text-gray-400 pb-2 uppercase">Tools</div>
-        <RouterLink
-          to="/wallet/suggest"
-          class="py-2 px-4 flex items-center cursor-pointer rounded-lg hover:bg-gray-100 dark:hover:bg-[#373f59]"
-        >
-          <Icon icon="mdi:frequently-asked-questions" class="text-xl mr-2" />
-          <div class="text-base capitalize flex-1 text-gray-600 dark:text-gray-200">Wallet Helper</div>
-        </RouterLink>
-        <div
-          v-if="showDiscord"
-          class="px-4 text-sm pt-2 text-gray-400 pb-2 uppercase"
-        >
-          {{ $t('module.sponsors') }}
-        </div>
-        <Sponsors v-if="showDiscord" />
         <div class="px-4 text-sm pt-2 text-gray-400 pb-2 uppercase">{{ $t('module.links') }}</div>
         <a
           href="https://twitter.com/xitcoin_org"
@@ -239,15 +208,6 @@ const show_ad = computed(() => {
         >
           <Icon icon="mdi:twitter" class="text-xl mr-2" />
           <div class="text-base capitalize flex-1 text-gray-600 dark:text-gray-200">Twitter</div>
-        </a>
-        <a
-          v-if="showDiscord"
-          href="https://discord.com/invite/CmjYVSr6GW"
-          target="_blank"
-          class="py-2 px-4 flex items-center rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-[#373f59]"
-        >
-          <Icon icon="mdi:discord" class="text-xl mr-2" />
-          <div class="text-base capitalize flex-1 text-gray-600 dark:text-gray-200">Discord</div>
         </a>
         <a
           href="https://xitcoin.gitbook.io/guide/"
@@ -305,7 +265,6 @@ const show_ad = computed(() => {
             >
           </div>
         </div>
-        <AdBanner v-if="show_ad" />
         <RouterView v-slot="{ Component }">
           <Transition mode="out-in">
             <Component :is="Component" />
